@@ -10,14 +10,20 @@ const list = [
 ];
 
 const MainSection = (props) => {
+
+  const [getList,setList]=useState(list);
+
+  const addAppendHandler=(obj)=>{
+    setList([...getList,obj]);
+  }
   
   return (
     <div className="main-section">
       {props.active === "INBOX" && (
-        <Inbox list={} append={} />
+        <Inbox list={getList} append={addAppendHandler} />
       )}
-      {props.active === "TODAY" && <Today list={} />}
-      {props.active === "NEXT" && <Next7Days list={} />}
+      {props.active === "TODAY" && <Today list={getList} />}
+      {props.active === "NEXT" && <Next7Days list={getList} />}
     </div>
   );
 };
