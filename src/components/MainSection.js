@@ -10,20 +10,19 @@ const list = [
 ];
 
 const MainSection = (props) => {
+  const [filteredList, setFilteredList] = useState(list);
+  const addToList = (obj) => {
+    list.push(obj);
+    setFilteredList(list);
+  };
 
-  const [getList,setList]=useState(list);
-
-  const addAppendHandler=(obj)=>{
-    setList([...getList,obj]);
-  }
-  
   return (
     <div className="main-section">
       {props.active === "INBOX" && (
-        <Inbox list={getList} append={addAppendHandler} />
+        <Inbox list={filteredList} append={addToList} />
       )}
-      {props.active === "TODAY" && <Today list={getList} />}
-      {props.active === "NEXT" && <Next7Days list={getList} />}
+      {props.active === "TODAY" && <Today list={filteredList} />}
+      {props.active === "NEXT" && <Next7Days list={filteredList} />}
     </div>
   );
 };

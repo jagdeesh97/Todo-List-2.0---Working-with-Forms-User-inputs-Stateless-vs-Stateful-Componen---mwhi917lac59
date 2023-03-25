@@ -3,23 +3,22 @@ import ListRender from "./ListRender";
 
 const Today = (props) => {
   const date = new Date();
+  const filteredList = props.list.filter((task) => {
+    if (date.getFullYear() !== task.date.getFullYear()) {
+      return false;
+    }
+    if (date.getMonth() !== task.date.getMonth()) {
+      return false;
+    }
+    if (date.getDate() !== task.date.getDate()) {
+      return false;
+    }
+    return true;
+  });
 
-  let filterList=props.list.filter((obj)=>{
-        if(obj.date.getFullYear() !=date.getFullYear()){
-          return false;
-        }
-        if(obj.date.getMonth() !=date.getMonth()){
-          return false;
-        }
-        if(obj.date.getDate() !=date.getDate()){
-          return false;
-        }
-            return true;
-  })
-  
   return (
     <div id="today-list">
-      <ListRender list={filterList} />
+      <ListRender list={filteredList} />
     </div>
   );
 };
